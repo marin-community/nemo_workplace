@@ -10,7 +10,7 @@ from dataclasses import dataclass
 from pathlib import Path
 from typing import Any
 
-from nemo_workplace.tools import CASE_SENSITIVE_COLUMNS, get_tools, source_state
+from .tools import CASE_SENSITIVE_COLUMNS, get_tools, source_state
 
 ACTION_INTERFACE = "workplace:v1"
 SEED_SHA256 = "abcfd3d4727c66b6dfc145b59f720b819ac9de1b65df285cd30bc80bc10b3b8b"
