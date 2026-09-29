@@ -1,0 +1,8 @@
+The Workplace Assistant tool modules and CSV seed data derive from
+NVIDIA-NeMo/Gym at revision 1e668906d2e69a9e8ee9aaafc60050a4025d9688.
+Their original SPDX Apache-2.0 copyright notices remain in the tool modules.
+The Apache-2.0 license is reproduced in LICENSE. UPSTREAM_PROVENANCE.json
+records the source paths and content digests of the copied data and tools.
+
+The provider adapter and tool registry were developed by The Marin Authors.
+They adapt the upstream tools to an isolated, state-graded tool provider.
