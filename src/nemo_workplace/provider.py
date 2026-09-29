@@ -131,19 +131,6 @@ class NemoWorkplaceProvider:
         self.trace.append(ToolTrace(call_id=call_id, name=name, arguments=arguments, output=encoded))
         return encoded
 
-    def authoritative_state(self) -> dict[str, Any]:
-        """Read the provider's mutable tables without consulting the transcript."""
-        return source_state(self.tool_env)
-
-    def grade_state(self, parameters_json: str) -> float:
-        """Compare current authoritative state with private precomputed state."""
-        expected = json.loads(parameters_json)
-        actual = state_snapshot(self.tool_env)
-        if not isinstance(expected, dict) or set(expected) != set(actual):
-            raise ValueError("Invalid Workplace expected state")
-        for name, table in expected.items():
-            if not isinstance(table, dict) or set(table) != {"columns", "index", "data"}:
-                raise ValueError(f"Invalid Workplace expected table: {name}")
-            if table["columns"] != actual[name]["columns"]:
-                raise ValueError(f"Workplace expected table has different columns: {name}")
-        return float(actual == expected)
+    def canonical_state(self) -> dict[str, Any]:
+        """Export the authoritative tables with upstream comparison normalization."""
+        return state_snapshot(self.tool_env)

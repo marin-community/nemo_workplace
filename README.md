@@ -3,8 +3,9 @@
 This package exposes the 27 NeMo Workplace Assistant tools through
 `nemo_workplace.provider:NemoWorkplaceProvider`. Each provider instance starts
 from the same six CSV seed files and keeps its mutable tables in memory. A trial
-can dispatch actions through `dispatch_action` and grade the resulting state
-through `grade_state`.
+can dispatch actions through `dispatch_action` and read normalized,
+JSON-compatible authoritative state through `canonical_state`. Grading compares
+that state with an independently constructed private expected state.
 
 Install from a full Git commit so code, schemas, and seed data resolve together:
 
