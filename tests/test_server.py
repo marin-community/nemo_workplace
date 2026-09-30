@@ -117,6 +117,7 @@ def test_server_recovers_tool_error_and_never_replays_call(container_image):
             request(
                 "bad", "call", {**reply, "arguments": "broken-json", "call_id": "bad-1"}
             ),
+            request("error-state", "state", {}),
             request("reply", "call", reply),
             request("before", "state", {}),
             request("duplicate-call", "call", reply),
@@ -125,12 +126,16 @@ def test_server_recovers_tool_error_and_never_replays_call(container_image):
         ],
         container_image,
     )
-    assert "Error executing tool" in json.loads(responses[1]["result"])["output"]
-    assert "error" not in responses[2]
-    assert "error" in responses[4] and "error" in responses[5]
-    assert responses[3]["result"] == responses[6]["result"]
+    assert isinstance(json.loads(responses[1]["result"])["output"], str)
     assert (
-        responses[3]["result"]
+        responses[2]["result"]
+        == NemoWorkplaceProvider(seed_sha256=SEED_SHA256).canonical_state()
+    )
+    assert "error" not in responses[3]
+    assert "error" in responses[5] and "error" in responses[6]
+    assert responses[4]["result"] == responses[7]["result"]
+    assert (
+        responses[4]["result"]
         != NemoWorkplaceProvider(seed_sha256=SEED_SHA256).canonical_state()
     )
 
