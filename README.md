@@ -50,6 +50,9 @@ docker run --rm --pull never --network none --read-only --tmpfs /tmp \
 The service needs no host mounts, workspace handle, Docker socket, or network.
 The image includes the provider code, schemas, initial CSV data, and upstream
 license/provenance files. It excludes dataset examples and gold action lists.
+Image labels under `org.marin.taskcompendium` expose `action-interface`,
+`seed-sha256`, `provider-revision`, and `tools-sha256` for offline export
+validation. The initialization handshake checks the running provider separately.
 
 Requests are UTF-8 JSON objects on individual newline-terminated lines:
 `{"id":"request-1","method":"state","params":{}}`. Responses contain
