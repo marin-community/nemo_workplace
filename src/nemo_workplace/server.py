@@ -114,7 +114,9 @@ async def serve(reader: BinaryIO, writer: BinaryIO) -> None:
         request_id = None
         try:
             request = json.loads(
-                line, object_pairs_hook=_unique_object, parse_constant=_reject_constant
+                line.decode("utf-8"),
+                object_pairs_hook=_unique_object,
+                parse_constant=_reject_constant,
             )
             if isinstance(request, dict) and isinstance(request.get("id"), str):
                 request_id = request["id"]
