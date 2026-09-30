@@ -1,0 +1,7 @@
+*
+!requirements-container.txt
+!src/
+!src/**
+!LICENSE
+!NOTICE
+!UPSTREAM_PROVENANCE.json
